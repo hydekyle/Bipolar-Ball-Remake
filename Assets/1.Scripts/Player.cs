@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public ColorObs myColor = new ColorObs();
     public Rigidbody2D myRB;
     bool isBlueColor = true;
-    public float xVelocity = 1, yVelocity = -9;
+    public float xVelocity = 3, yVelocity = -9;
     public float timeBeetweenTapToSwapColor = 0.2f;
     float timeLastTap = -1f;
     bool isActive = false;
@@ -42,13 +42,13 @@ public class Player : MonoBehaviour
 
     void Controls()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             myRB.velocity = new Vector2(xVelocity, yVelocity * -1);
             if (timeLastTap + timeBeetweenTapToSwapColor > Time.time) SwapColor();
             timeLastTap = Time.time;
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.Space))
         {
             if (myRB.velocity.y > myRB.velocity.y / 3)
                 myRB.velocity = new Vector2(xVelocity, myRB.velocity.y / 3);
